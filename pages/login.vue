@@ -1,6 +1,8 @@
 <template>
   <section class="w-full min-h-[90vh] bg-slate-100 flex justify-center">
-    <div class="bg-white max-w-sm h-min text-2xl my-12 p-8 rounded">
+    <div
+      class="bg-white max-w-sm h-min text-2xl my-12 p-8 rounded shadow-[0_0_3px_1px] shadow-slate-200"
+    >
       <h2 class="text-center text-slate-800 text-xl font-bold mb-4">Logar com sua conta</h2>
 
       <form @submit.prevent="loginUser">
