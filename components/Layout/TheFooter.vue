@@ -7,12 +7,10 @@
         target="_blank"
         class="font-bold underline"
         >Victor Tavares</a
-      >. O Código Fonte está disponível no
+      >. O Código Fonte está disponível no meu
       <a href="https://github.com/victortavaresdev" target="_blank" class="font-bold underline"
         >Github</a
       >.
     </p>
   </footer>
 </template>
-
-<script setup lang="ts"></script>

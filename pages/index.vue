@@ -11,12 +11,3 @@
     </div>
   </main>
 </template>
-
-<script setup lang="ts">
-useSeoMeta({
-  title: 'QuizDev - Quizzes de programação',
-  ogTitle: 'QuizDev - Quizzes de programação',
-  description: 'QuizDev é uma plataforma de quizzes de programação',
-  ogDescription: 'QuizDev é uma plataforma de quizzes de programação'
-})
-</script>

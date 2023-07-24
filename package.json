@@ -1,5 +1,7 @@
 {
-  "name": "nuxt-app",
+  "name": "quiz-dev",
+  "author": "Victor Tavares",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -20,7 +22,8 @@
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/node": "^18.16.19",
     "eslint": "^8.45.0",
-    "nuxt": "^3.6.2"
+    "nuxt": "^3.6.2",
+    "nuxt-icon": "^0.4.2"
   },
   "overrides": {
     "vue": "latest"
