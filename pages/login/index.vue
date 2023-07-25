@@ -4,7 +4,7 @@ import { useAuthStore } from '~/stores/useAuthStore'
 const formData = reactive({ email: '', password: '' })
 const errorMessage = ref('')
 
-const { login, github } = useAuthStore()
+const { login } = useAuthStore()
 
 const handleLogin = async () => {
   const { error } = await login(formData)
@@ -14,10 +14,6 @@ const handleLogin = async () => {
     setTimeout(() => (errorMessage.value = ''), 3000)
   }
 }
-
-// const handleGithub = async () => {
-//   await github()
-// }
 </script>
 
 <template>

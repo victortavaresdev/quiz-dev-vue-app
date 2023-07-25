@@ -11,6 +11,7 @@ export const useApiFetch = <T>(path: string, options?: UseFetchOptions<T>) => {
 
   return useFetch(`http://localhost:8000/api/v1/${path}`, {
     credentials: 'include',
+    baseURL: 'http://localhost:8000',
     watch: false,
     ...options,
     headers: {

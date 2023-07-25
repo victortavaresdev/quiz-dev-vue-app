@@ -15,13 +15,14 @@ const currentQuestion = computed(() => questions.value.data[currentIndex.value])
 const totalQuestions = computed(() => questions.value.data.length)
 
 const postUserScore = async () => {
-  await useApiFetch('scores', {
-    method: 'POST',
-    body: {
-      total_points: score.value,
-      user_id: user?.id
-    }
-  })
+  if (user) {
+    await useApiFetch('scores', {
+      method: 'POST',
+      body: {
+        total_points: score.value
+      }
+    })
+  }
 }
 
 const checkAnswer = () => {

@@ -19,7 +19,9 @@ const auth = useAuthStore()
           <NuxtLink to="/categorias" class="tracking-wider hover:underline">Categorias</NuxtLink>
         </l>
         <li>
-          <NuxtLink class="tracking-wider hover:underline" to="/leaderboard">Leaderboard</NuxtLink>
+          <NuxtLink class="tracking-wider hover:underline" to="/leaderboard?page=1"
+            >Leaderboard</NuxtLink
+          >
         </li>
         <li class="tracking-wider">
           <NuxtLink class="tracking-wider hover:underline" to="/sobre">Sobre</NuxtLink>
