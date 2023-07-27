@@ -46,6 +46,7 @@ const changePage = (page: number) => {
           <TableBodyItem
             v-for="{ id, user, totalScore } in users"
             :key="id"
+            :id="id"
             :user="user"
             quizzes="6"
             average="85"

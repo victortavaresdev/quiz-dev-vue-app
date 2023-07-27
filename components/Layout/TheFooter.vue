@@ -1,5 +1,5 @@
 <template>
-  <footer class="w-full bg-slate-200 py-6 border-t-emerald-600 border">
+  <footer class="w-full bg-slate-200 py-6 border-t-gray-300 border">
     <p class="text-gray-700 text-center text-sm">
       Desenvolvido por
       <a

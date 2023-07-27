@@ -2,6 +2,7 @@ interface UserProps {
   id: string
   name: string
   email: string
+  created_at: string
 }
 
 interface LoginProps {
@@ -22,6 +23,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const getUserData = async () => {
     const { data } = await useApiFetch('auth/profile')
+
     user.value = data.value as UserProps
   }
 
@@ -31,7 +33,7 @@ export const useAuthStore = defineStore('auth', () => {
       body: data
     })
 
-    if (register.data.value) {
+    if (register.status.value === 'success') {
       navigateTo('/login')
     }
 
@@ -44,7 +46,7 @@ export const useAuthStore = defineStore('auth', () => {
       body: credentials
     })
 
-    if (login.data.value) {
+    if (login.status.value === 'success') {
       localStorage.setItem('token', JSON.stringify(login.data?.value))
       await getUserData()
 
@@ -58,7 +60,7 @@ export const useAuthStore = defineStore('auth', () => {
     await useApiFetch('auth/logout', { method: 'POST' })
 
     user.value = null
-    navigateTo('/login')
+    navigateTo('/')
   }
 
   const github = async () => {
@@ -70,6 +72,11 @@ export const useAuthStore = defineStore('auth', () => {
       method: 'PUT',
       body: data
     })
+
+    if ((result.status.value = 'success')) {
+      user.value = null
+      navigateTo('/login')
+    }
 
     return result
   }

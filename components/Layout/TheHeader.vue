@@ -7,7 +7,7 @@ const auth = useAuthStore()
 
 <template>
   <header
-    class="bg-white text-slate-900 text-sm flex justify-between items-center px-12 py-4 h-[70px] border-b-emerald-400 border"
+    class="bg-white text-slate-900 text-sm flex justify-between items-center px-12 py-4 h-[70px] border-b-gray-300 border"
   >
     <div>
       <NuxtLink to="/">QuizDev</NuxtLink>
