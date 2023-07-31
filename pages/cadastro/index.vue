@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { useAuthStore } from '~/stores/useAuthStore'
+const { $authStore } = useNuxtApp()
 
 const formData = reactive({ name: '', email: '', password: '' })
 const errorMessage = ref('')
 
-const { register } = useAuthStore()
-
 const handleRegister = async () => {
-  const { error } = await register(formData)
+  const { error } = await $authStore.register(formData)
 
   if (error) {
     errorMessage.value = error.value?.data['message']
@@ -23,9 +21,7 @@ const handleRegister = async () => {
     >
       <FormTitle text="Criar nova conta" />
 
-      <div v-show="errorMessage" class="w-full py-1 bg-red-100 rounded">
-        <p class="text-red-500 text-sm text-center">{{ errorMessage }}</p>
-      </div>
+      <ErrorMessage v-show="errorMessage" :errorMessage="errorMessage" />
 
       <form @submit.prevent="handleRegister" class="flex flex-col gap-2">
         <FormInputItem

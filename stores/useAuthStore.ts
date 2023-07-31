@@ -43,10 +43,6 @@ export const useAuthStore = defineStore('auth', () => {
     navigateTo('/')
   }
 
-  const github = async () => {
-    await useApiFetch('auth/redirect')
-  }
-
   const updateUser = async (data: UpdateUserProps) => {
     const result = await useApiFetch(`users/${user.value?.id}/update`, {
       method: 'PUT',
@@ -79,7 +75,6 @@ export const useAuthStore = defineStore('auth', () => {
     getUserData,
     register,
     login,
-    github,
     logout,
     updateUser,
     deleteUser

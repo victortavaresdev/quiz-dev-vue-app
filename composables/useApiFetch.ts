@@ -1,7 +1,7 @@
 import type { UseFetchOptions } from 'nuxt/app'
 
 export const useApiFetch = <T>(path: string, options?: UseFetchOptions<T>) => {
-  let headers: any = {}
+  let headers: { Authorization?: string } = {}
 
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null
   if (token) {

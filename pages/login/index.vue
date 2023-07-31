@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { useAuthStore } from '~/stores/useAuthStore'
+const { $authStore } = useNuxtApp()
 
 const formData = reactive({ email: '', password: '' })
 const errorMessage = ref('')
 
-const { login } = useAuthStore()
-
 const handleLogin = async () => {
-  const { error } = await login(formData)
+  const { error } = await $authStore.login(formData)
 
   if (error) {
     errorMessage.value = error.value?.data['message']
@@ -23,9 +21,7 @@ const handleLogin = async () => {
     >
       <FormTitle text="Logar com sua conta" />
 
-      <div v-show="errorMessage" class="w-full py-1 bg-red-100 rounded">
-        <p class="text-red-500 text-sm text-center">{{ errorMessage }}</p>
-      </div>
+      <ErrorMessage v-show="errorMessage" :errorMessage="errorMessage" />
 
       <form @submit.prevent="handleLogin" class="flex flex-col gap-2">
         <FormInputItem
@@ -53,8 +49,10 @@ const handleLogin = async () => {
       <span class="w-full h-[1px] block bg-slate-400 my-6"></span>
 
       <div class="flex justify-center items-center">
-        <p class="text-sm text-gray-600 mr-2">Entre com sua conta:</p>
-        <img src="img/github.svg" alt="github icon" class="cursor-pointer" />
+        <p class="text-sm text-gray-600 mr-2">Não tem conta cadastrada?</p>
+        <NuxtLink to="/cadastro" class="text-emerald-600 text-sm tracking-wider"
+          >Cadastro
+        </NuxtLink>
       </div>
     </div>
   </section>

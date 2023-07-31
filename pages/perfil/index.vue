@@ -1,37 +1,33 @@
 <script setup lang="ts">
-import { useAuthStore } from '~/stores/useAuthStore'
+const { $authStore, $profileStore } = useNuxtApp()
 
-const { user, updateUser, deleteUser } = useAuthStore()
+const userId: any = $authStore?.user?.id
 
-const formData: any = reactive({ name: user?.name, bio: user?.bio, image: user?.image })
-const editProfile = ref<boolean>(false)
-const deleteUserModal = ref<boolean>(false)
+const formData: any = reactive({
+  name: $authStore.user?.name,
+  bio: $authStore.user?.bio,
+  image: $authStore.user?.image
+})
 
-const achievements: any = ref([])
-const totalPoints = ref<number>(0)
+const editProfile = ref(false)
+const deleteUserModal = ref(false)
 
-const userAchievements = async () => {
-  const { data: _achievements }: any = await useApiFetch(`achievements/${user?.id}`)
-  achievements.value = _achievements?.value.data
-}
-
-const userResults = async () => {
-  const { data: _results }: any = await useApiFetch(`results/${user?.id}`)
-  totalPoints.value = _results.value.totalPoints
+const getProfileData = () => {
+  $profileStore.userAchievements(userId)
+  $profileStore.userResults(userId)
 }
 
 onMounted(() => {
-  userAchievements()
-  userResults()
+  getProfileData()
 })
 
 const handleUpdate = async () => {
-  await updateUser(formData)
+  await $authStore.updateUser(formData)
   editProfile.value = false
 }
 
 const handleDelete = async () => {
-  await deleteUser()
+  await $authStore.deleteUser()
 }
 
 definePageMeta({
@@ -45,12 +41,12 @@ definePageMeta({
       <div>
         <div class="flex flex-col gap-4" v-if="!editProfile">
           <div>
-            <ProfilePicture :image="user?.image" size="15.625rem" />
+            <ProfilePicture :image="$authStore.user?.image" size="15.625rem" />
             <p class="text-slate-900 text-2xl font-bold capitalize tracking-wider">
-              {{ user?.name }}
+              {{ $authStore.user?.name }}
             </p>
             <p class="text-slate-700 tracking-wider">
-              {{ user?.bio }}
+              {{ $authStore.user?.bio }}
             </p>
           </div>
 
@@ -97,7 +93,7 @@ definePageMeta({
         </div>
 
         <div v-else>
-          <ProfilePicture :image="user?.image" size="15.625rem" />
+          <ProfilePicture :image="$authStore.user?.image" size="15.625rem" />
 
           <div class="flex flex-col gap-2 mb-4">
             <FormInputItem id="name" type="text" label="nome" v-model="formData.name" />
@@ -137,7 +133,7 @@ definePageMeta({
 
         <div>
           <p>
-            Pontuação total: <span class="font-bold">{{ totalPoints }}</span>
+            Pontuação total: <span class="font-bold">{{ $profileStore.totalPoints }}</span>
           </p>
         </div>
       </div>
@@ -149,7 +145,7 @@ definePageMeta({
 
         <div class="grid grid-cols-2 gap-4">
           <AchievementItem
-            v-for="{ id, achievementType, unlockedAt } in achievements"
+            v-for="{ id, achievementType, unlockedAt } in $profileStore.achievements"
             :key="id"
             :text="achievementType"
             :date="unlockedAt"

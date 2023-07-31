@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { useAuthStore } from '~/stores/useAuthStore'
+const { $authStore } = useNuxtApp()
 
 const userMenu = ref(false)
-const auth = useAuthStore()
 </script>
 
 <template>
@@ -41,12 +40,12 @@ const auth = useAuthStore()
       </div>
 
       <div
-        v-if="auth.user"
+        v-if="$authStore.user"
         @click="() => (userMenu = !userMenu)"
         class="bg-emerald-600 rounded relative text-white p-1 flex items-center gap-1 h-[36px] cursor-pointer hover:bg-emerald-500 duration-300"
       >
         <Icon name="ic:baseline-account-circle" size="1.5rem" />
-        <span class="text-sm capitalize"> {{ auth.user?.name }} </span>
+        <span class="text-sm capitalize"> {{ $authStore.user?.name }} </span>
         <UserMenu v-show="userMenu" />
       </div>
       <div class="flex items-center gap-3" v-else>

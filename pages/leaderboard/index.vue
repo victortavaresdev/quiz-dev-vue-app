@@ -26,15 +26,10 @@ const changePage = (page: number) => {
 
 <template>
   <section class="w-full min-h-[90vh] bg-slate-100">
-    <div class="px-8 py-12">
-      <div class="mb-8">
-        <h2 class="text-emerald-600 text-3xl uppercase font-bold font-['Bruno_Ace_SC']">
-          leaderboard
-        </h2>
-        <p class="text-gray-600">Encontre sua competição</p>
-      </div>
+    <div class="px-8 py-12 flex flex-col gap-8">
+      <TheHeading title="leaderboard" subtitle="Encontre sua competição." />
 
-      <div class="bg-white p-6 mb-4 rounded-lg shadow-[0_0_3px_1px] shadow-slate-200">
+      <div class="bg-white p-6 rounded-lg shadow-[0_0_3px_1px] shadow-slate-200">
         <table class="w-full text-sm border-gray-300 border rounded">
           <thead class="border-b border-gray-300 bg-gray-100">
             <TableHeadItem />

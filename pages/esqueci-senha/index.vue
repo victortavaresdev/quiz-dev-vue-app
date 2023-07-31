@@ -35,16 +35,8 @@ const handleForgotPassword = async () => {
       <FormTitle text="Redefinição de senha" />
 
       <div v-show="message.text">
-        <div class="w-full py-1 bg-red-100 rounded" v-if="message.isError">
-          <p class="text-red-500 text-sm text-center">
-            {{ message.text }}
-          </p>
-        </div>
-        <div class="w-full py-1 bg-green-100 rounded" v-else-if="!message.isError">
-          <p class="text-green-500 text-sm text-center">
-            {{ message.text }}
-          </p>
-        </div>
+        <ErrorMessage v-if="message.isError" :errorMessage="message.text" />
+        <SuccessMessage v-else-if="!message.isError" :successMessage="message.text" />
       </div>
 
       <form @submit.prevent="handleForgotPassword" class="flex flex-col gap-4">

@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useAuthStore } from '~/stores/useAuthStore'
-
+const { $authStore } = useNuxtApp()
 const { slug } = useRoute().params
-const { user } = useAuthStore()
 
 const { data: questions }: any = await useApiFetch(`quizzes/${slug}/questions`)
 
@@ -15,7 +13,7 @@ const currentQuestion = computed(() => questions.value.data[currentIndex.value])
 const totalQuestions = computed(() => questions.value.data.length)
 
 const postUserScore = async () => {
-  if (user) {
+  if ($authStore.user) {
     await useApiFetch('results', {
       method: 'POST',
       body: {

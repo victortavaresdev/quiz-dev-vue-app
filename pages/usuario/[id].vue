@@ -30,7 +30,7 @@ onMounted(() => {
           <div>
             <ProfilePicture size="15.625rem" />
             <p class="text-slate-900 text-2xl font-bold capitalize tracking-wider">
-              {{ user && user.name }}
+              {{ user?.name }}
             </p>
             <p class="text-slate-700 tracking-wider">
               {{ user?.bio }}
