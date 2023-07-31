@@ -1,15 +1,9 @@
 <script setup lang="ts">
-interface UsersProps {
-  id: string
-  user: string
-  totalScore: number
-}
-
-const users = ref<UsersProps | []>([])
+const users = ref<LeaderboardProps | []>([])
 const currentPage = ref<number>(1)
 const paginationMeta = ref<any>(null)
 
-const fetchData = () => {
+const getLeaderboardData = () => {
   const { data: leaderboard }: any = useApiFetch('leaderboard', {
     query: {
       page: currentPage.value
@@ -21,39 +15,44 @@ const fetchData = () => {
 }
 
 onMounted(() => {
-  fetchData()
+  getLeaderboardData()
 })
 
 const changePage = (page: number) => {
   currentPage.value = page
-  fetchData()
+  getLeaderboardData()
 }
 </script>
 
 <template>
   <section class="w-full min-h-[90vh] bg-slate-100">
-    <div class="px-8 py-16">
+    <div class="px-8 py-12">
       <div class="mb-8">
-        <h2 class="text-emerald-600 text-4xl uppercase">leaderboard</h2>
+        <h2 class="text-emerald-600 text-3xl uppercase font-bold font-['Bruno_Ace_SC']">
+          leaderboard
+        </h2>
         <p class="text-gray-600">Encontre sua competição</p>
       </div>
 
-      <table class="w-full text-sm border-gray-400 border rounded mb-4">
-        <thead class="border-b border-gray-400">
-          <TableHeadItem />
-        </thead>
-        <tbody>
-          <TableBodyItem
-            v-for="{ id, user, totalScore } in users"
-            :key="id"
-            :id="id"
-            :user="user"
-            quizzes="6"
-            average="85"
-            :score="totalScore"
-          />
-        </tbody>
-      </table>
+      <div class="bg-white p-6 mb-4 rounded-lg shadow-[0_0_3px_1px] shadow-slate-200">
+        <table class="w-full text-sm border-gray-300 border rounded">
+          <thead class="border-b border-gray-300 bg-gray-100">
+            <TableHeadItem />
+          </thead>
+          <tbody>
+            <TableBodyItem
+              v-for="({ id, user, image, totalScore }, index) in users"
+              :key="id"
+              :id="id"
+              :user="user"
+              :image="image"
+              :ranking="index"
+              quizzes="6"
+              :totalScore="totalScore"
+            />
+          </tbody>
+        </table>
+      </div>
 
       <div class="flex items-center justify-center gap-4">
         <div class="text-sm text-gray-800 font-bold">

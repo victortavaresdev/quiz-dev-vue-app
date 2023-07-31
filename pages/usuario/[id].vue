@@ -1,22 +1,22 @@
 <script setup lang="ts">
 const { id } = useRoute().params
 
-const user = ref<{ name: string } | null>(null)
+const user = ref<{ name: string; bio: string } | null>(null)
 const loading = ref<boolean>(true)
 
-const fetchUserData = () => {
+const getUserData = () => {
   try {
     const { data: _user }: any = useApiFetch(`users/${id}`)
     user.value = _user?.value?.data
 
-    if (user.value) loading.value = false
+    loading.value = false
   } catch (error) {
     console.log(error)
   }
 }
 
 onMounted(() => {
-  fetchUserData()
+  getUserData()
 })
 </script>
 
@@ -28,9 +28,12 @@ onMounted(() => {
       <div>
         <div class="flex flex-col gap-4">
           <div>
-            <ProfilePicture />
+            <ProfilePicture size="15.625rem" />
             <p class="text-slate-900 text-2xl font-bold capitalize tracking-wider">
               {{ user && user.name }}
+            </p>
+            <p class="text-slate-700 tracking-wider">
+              {{ user?.bio }}
             </p>
           </div>
         </div>

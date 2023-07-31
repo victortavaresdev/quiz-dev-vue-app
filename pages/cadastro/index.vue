@@ -56,7 +56,7 @@ const handleRegister = async () => {
       <span class="w-full h-[1px] block bg-slate-400 my-6"></span>
 
       <div class="flex justify-center items-center">
-        <p class="text-sm text-gray-600 mr-2">Já tem conta cadastrada ou github?</p>
+        <p class="text-sm text-gray-600 mr-2">Já tem conta cadastrada?</p>
         <NuxtLink to="/login" class="text-emerald-600 text-sm tracking-wider">Login </NuxtLink>
       </div>
     </div>

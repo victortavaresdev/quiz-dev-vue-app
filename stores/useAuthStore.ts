@@ -1,23 +1,3 @@
-interface UserProps {
-  id: string
-  name: string
-  email: string
-  created_at: string
-}
-
-interface LoginProps {
-  email: string
-  password: string
-}
-
-interface RegisterProps {
-  name: string
-  email: string
-  password: string
-}
-
-type UpdateUserProps = Partial<UserProps>
-
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<UserProps | null>(null)
 

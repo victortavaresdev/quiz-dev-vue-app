@@ -16,9 +16,10 @@ const totalQuestions = computed(() => questions.value.data.length)
 
 const postUserScore = async () => {
   if (user) {
-    await useApiFetch('scores', {
+    await useApiFetch('results', {
       method: 'POST',
       body: {
+        taken_time: 120,
         total_points: score.value
       }
     })

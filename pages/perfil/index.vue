@@ -3,9 +3,27 @@ import { useAuthStore } from '~/stores/useAuthStore'
 
 const { user, updateUser, deleteUser } = useAuthStore()
 
-const formData = reactive({ name: user?.name })
-const editProfile = ref(false)
-const deleteUserModal = ref(false)
+const formData: any = reactive({ name: user?.name, bio: user?.bio, image: user?.image })
+const editProfile = ref<boolean>(false)
+const deleteUserModal = ref<boolean>(false)
+
+const achievements: any = ref([])
+const totalPoints = ref<number>(0)
+
+const userAchievements = async () => {
+  const { data: _achievements }: any = await useApiFetch(`achievements/${user?.id}`)
+  achievements.value = _achievements?.value.data
+}
+
+const userResults = async () => {
+  const { data: _results }: any = await useApiFetch(`results/${user?.id}`)
+  totalPoints.value = _results.value.totalPoints
+}
+
+onMounted(() => {
+  userAchievements()
+  userResults()
+})
 
 const handleUpdate = async () => {
   await updateUser(formData)
@@ -27,9 +45,12 @@ definePageMeta({
       <div>
         <div class="flex flex-col gap-4" v-if="!editProfile">
           <div>
-            <ProfilePicture />
+            <ProfilePicture :image="user?.image" size="15.625rem" />
             <p class="text-slate-900 text-2xl font-bold capitalize tracking-wider">
               {{ user?.name }}
+            </p>
+            <p class="text-slate-700 tracking-wider">
+              {{ user?.bio }}
             </p>
           </div>
 
@@ -54,7 +75,7 @@ definePageMeta({
               class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-6 bg-gray-800 rounded z-10"
             >
               <div class="mb-4">
-                <h3 class="text-white">Tem certeza que quer deletar a conta?</h3>
+                <h3 class="text-white">Tem certeza que deseja deletar a conta?</h3>
               </div>
 
               <div class="flex flex-col gap-2">
@@ -76,19 +97,24 @@ definePageMeta({
         </div>
 
         <div v-else>
-          <ProfilePicture />
+          <ProfilePicture :image="user?.image" size="15.625rem" />
 
           <div class="flex flex-col gap-2 mb-4">
-            <div>
-              <label for="name" class="text-gray-500 capitalize text-base">Nome</label>
-              <input
-                id="name"
-                type="text"
-                v-model="formData.name"
-                class="w-full h-10 p-4 rounded block border-gray-300 border outline-none placeholder:text-sm"
-                required
-              />
-            </div>
+            <FormInputItem id="name" type="text" label="nome" v-model="formData.name" />
+            <FormInputItem
+              id="bio"
+              type="text"
+              label="biografia"
+              v-model="formData.bio"
+              placeholder="Adicione sua bio"
+            />
+            <FormInputItem
+              id="image"
+              type="text"
+              label="imagem"
+              v-model="formData.image"
+              placeholder="URL da sua foto de perfil"
+            />
           </div>
 
           <div class="flex gap-4">
@@ -110,7 +136,9 @@ definePageMeta({
         <span class="w-[280px] block h-[3px] bg-gray-400 my-6 rounded"></span>
 
         <div>
-          <p>Pontuação total: <span class="font-bold">0</span></p>
+          <p>
+            Pontuação total: <span class="font-bold">{{ totalPoints }}</span>
+          </p>
         </div>
       </div>
 
@@ -120,7 +148,12 @@ definePageMeta({
         </div>
 
         <div class="grid grid-cols-2 gap-4">
-          <AchievementItem text="pronto para jogar" :date="user?.created_at" />
+          <AchievementItem
+            v-for="{ id, achievementType, unlockedAt } in achievements"
+            :key="id"
+            :text="achievementType"
+            :date="unlockedAt"
+          />
         </div>
       </div>
     </div>

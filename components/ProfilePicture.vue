@@ -1,11 +1,12 @@
 <script setup lang="ts">
 defineProps<{
-  image?: string
+  image?: string | undefined | null
+  size: string
 }>()
 </script>
 
 <template>
-  <div class="w-[15.625rem] h-[15.625rem] mb-4">
+  <div :class="`w-[${size}] h-[${size}]`">
     <img
       :src="image ? image : '/_nuxt/assets/images/blank_profile.png'"
       alt="foto de perfil"

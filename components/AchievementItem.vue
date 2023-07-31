@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   text: string
-  date: string | undefined
+  date: string | Date
 }>()
 </script>
 
