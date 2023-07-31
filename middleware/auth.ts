@@ -1,9 +1,7 @@
-import { useAuthStore } from '~/stores/useAuthStore'
-
 export default defineNuxtRouteMiddleware((to, from) => {
-  const { user } = useAuthStore()
+  const { $authStore } = useNuxtApp()
 
-  if (!user && to.path === '/perfil') {
+  if (!$authStore.user && to.path === '/perfil') {
     return navigateTo('/')
   }
 })

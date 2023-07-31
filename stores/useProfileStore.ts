@@ -1,10 +1,10 @@
 export const useProfileStore = defineStore('profile', () => {
-  const achievements: any = ref([])
-  const totalPoints = ref<number>(0)
+  const achievements = ref<AchievementProps[]>([])
+  const totalPoints = ref(0)
 
   const userAchievements = async (userId: string) => {
     const { data: _achievements }: any = await useApiFetch(`achievements/${userId}`)
-    achievements.value = _achievements?.value.data
+    achievements.value = _achievements?.value?.data
   }
 
   const userResults = async (userId: string) => {
