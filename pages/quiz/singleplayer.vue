@@ -23,6 +23,7 @@ const getRandomQuizByCategory = async () => {
   quiz.value = _quiz.value.data.slug
 
   getQuestions()
+  startTimer()
 }
 
 const getQuestions = async () => {
@@ -39,7 +40,6 @@ const startTimer = () => {
 
 onMounted(() => {
   getRandomQuizByCategory()
-  startTimer()
 })
 
 const submitAnswer = () => {
@@ -80,7 +80,6 @@ const getNewQuiz = () => {
   isFinished.value = false
 
   getRandomQuizByCategory()
-  startTimer()
 }
 </script>
 
@@ -163,7 +162,9 @@ const getNewQuiz = () => {
           </h2>
           <p class="text-center text-xl">
             Sua pontuação:
-            <span class="font-bold text-emerald-800 p-2">{{ score }}</span>
+            <span class="font-bold text-emerald-800 p-2">{{
+              score.toString().padStart(2, '0')
+            }}</span>
           </p>
         </div>
 
