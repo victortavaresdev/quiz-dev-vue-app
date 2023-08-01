@@ -3,20 +3,15 @@ defineProps<{
   categories: any
 }>()
 
-const router = useRouter()
-
+const { push } = useRouter()
 const categoryChosen = ref('')
-const randomQuiz = ref('')
 
-const getRandomQuizByCategory = async () => {
+const getCategory = async () => {
   if (categoryChosen.value === '') {
     return
   }
 
-  const { data: _quiz }: any = await useApiFetch(`categories/${categoryChosen.value}/random-quiz`)
-  randomQuiz.value = _quiz.value.data.slug
-
-  router.push(`quiz/${randomQuiz.value}`)
+  push(`quiz/singleplayer?categoria=${categoryChosen.value}`)
 }
 </script>
 
@@ -40,7 +35,7 @@ const getRandomQuizByCategory = async () => {
       </select>
 
       <button
-        @click="getRandomQuizByCategory"
+        @click="getCategory"
         class="bg-emerald-600 hover:bg-emerald-800 duration-300 text-white rounded-lg p-2 w-full capitalize"
       >
         iniciar quiz

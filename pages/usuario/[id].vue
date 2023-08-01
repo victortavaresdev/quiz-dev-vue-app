@@ -28,7 +28,7 @@ onMounted(() => {
       <div>
         <div class="flex flex-col gap-4">
           <div>
-            <ProfilePicture size="15.625rem" />
+            <ProfilePicture class="w-[15.625rem] h-[15.625rem]" />
             <p class="text-slate-900 text-2xl font-bold capitalize tracking-wider">
               {{ user?.name }}
             </p>

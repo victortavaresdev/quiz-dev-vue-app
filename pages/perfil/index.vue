@@ -41,7 +41,11 @@ definePageMeta({
       <div>
         <div class="flex flex-col gap-4" v-if="!editProfile">
           <div>
-            <ProfilePicture :image="$authStore.user?.image" size="15.625rem" />
+            <ProfilePicture
+              :image="$authStore.user?.image"
+              class="w-[15.625rem] h-[15.625rem] mb-4"
+            />
+
             <p class="text-slate-900 text-2xl font-bold capitalize tracking-wider">
               {{ $authStore.user?.name }}
             </p>
@@ -93,7 +97,10 @@ definePageMeta({
         </div>
 
         <div v-else>
-          <ProfilePicture :image="$authStore.user?.image" size="15.625rem" />
+          <ProfilePicture
+            :image="$authStore.user?.image"
+            class="w-[15.625rem] h-[15.625rem] mb-4"
+          />
 
           <div class="flex flex-col gap-2 mb-4">
             <FormInputItem id="name" type="text" label="nome" v-model="formData.name" />
