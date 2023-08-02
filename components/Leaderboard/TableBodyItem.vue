@@ -4,8 +4,8 @@ defineProps<{
   user: string
   image: string | null
   ranking: number
-  quizzes: string
-  totalScore: number | null
+  totalQuizzes: number
+  totalScore: number
 }>()
 </script>
 
@@ -16,7 +16,7 @@ defineProps<{
       <ProfilePicture :image="image" class="w-[1.5rem] h-[1.5rem]" />
       <NuxtLink :to="`/usuario/${id}`">{{ user }}</NuxtLink>
     </td>
-    <td class="p-4 text-gray-800 align-middle">{{ quizzes }}</td>
+    <td class="p-4 text-gray-800 align-middle">{{ totalQuizzes }}</td>
     <td class="p-4 text-gray-800 align-middle">{{ totalScore }}</td>
   </tr>
 </template>

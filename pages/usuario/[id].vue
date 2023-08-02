@@ -28,7 +28,7 @@ onMounted(() => {
       <div>
         <div class="flex flex-col gap-4">
           <div>
-            <ProfilePicture class="w-[15.625rem] h-[15.625rem]" />
+            <ProfilePicture class="w-[15.625rem] h-[15.625rem] mb-4" />
             <p class="text-slate-900 text-2xl font-bold capitalize tracking-wider">
               {{ user?.name }}
             </p>
@@ -47,7 +47,9 @@ onMounted(() => {
 
       <div class="w-full px-8 py-4 flex flex-col gap-8">
         <div>
-          <h2 class="text-center text-3xl uppercase">conquistas</h2>
+          <h2 class="text-center text-3xl uppercase font-['Bruno_Ace_SC'] text-emerald-800">
+            conquistas
+          </h2>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
