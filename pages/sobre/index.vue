@@ -27,12 +27,12 @@
             1 - Responda à pergunta selecionando uma das
             <span class="font-bold">4 opções de resposta</span>.
           </li>
-          <li>2 - Responda a pergunta em menos de <span class="font-bold">10 segundos</span>.</li>
+          <li>2 - Responda a pergunta em menos de <span class="font-bold">15 segundos</span>.</li>
           <li>
             3 - As <span class="font-bold">pontuações</span> são mostradas na parte superior do
             quiz.
           </li>
-          <li>4 - Cada pergunta vale <span class="font-bold">1 ponto</span>.</li>
+          <li>4 - Cada pergunta vale <span class="font-bold">3 pontos</span>.</li>
           <li>5 - Um <span class="font-bold">quiz completo</span> consiste em 5 perguntas.</li>
         </ul>
       </div>

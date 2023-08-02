@@ -42,10 +42,11 @@ const userMenu = ref(false)
       <div
         v-if="$authStore.user"
         @click="() => (userMenu = !userMenu)"
-        class="bg-emerald-600 rounded relative text-white p-1 flex items-center gap-1 h-[36px] cursor-pointer hover:bg-emerald-500 duration-300"
+        class="relative text-slate-900 px-2 py-1 flex items-center gap-2 h-[36px] cursor-pointer hover:bg-gray-300 duration-300 rounded"
       >
-        <Icon name="ic:baseline-account-circle" size="1.5rem" />
+        <ProfilePicture :image="$authStore.user?.image" class="w-[1.625rem] h-[1.625rem]" />
         <span class="text-sm capitalize"> {{ $authStore.user?.name }} </span>
+
         <UserMenu v-show="userMenu" />
       </div>
       <div class="flex items-center gap-3" v-else>

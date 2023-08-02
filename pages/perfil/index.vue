@@ -114,7 +114,7 @@ definePageMeta({
             <FormInputItem
               id="image"
               type="text"
-              label="imagem"
+              label="avatar URL"
               v-model="formData.image"
               placeholder="URL da sua foto de perfil"
             />
@@ -140,7 +140,7 @@ definePageMeta({
 
         <div>
           <p>
-            Pontuação total: <span class="font-bold">{{ $profileStore.totalPoints }}</span>
+            Pontuação Total: <span class="font-bold">{{ $profileStore.totalPoints }}</span>
           </p>
         </div>
       </div>

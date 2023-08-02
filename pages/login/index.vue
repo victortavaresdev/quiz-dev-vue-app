@@ -39,7 +39,7 @@ const handleLogin = async () => {
           placeholder="Digite sua senha"
         />
 
-        <NuxtLink to="esqueci-senha" class="text-emerald-600 text-sm text-right cursor-pointer"
+        <NuxtLink to="esqueci-senha" class="text-gray-600 text-sm text-right cursor-pointer"
           >Esqueci a senha</NuxtLink
         >
 

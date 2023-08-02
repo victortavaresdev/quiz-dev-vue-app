@@ -1,22 +1,23 @@
 <script setup lang="ts">
-const { id } = useRoute().params
+const { id }: any = useRoute().params
+const { $profileStore } = useNuxtApp()
 
-const user = ref<{ name: string; bio: string } | null>(null)
-const loading = ref<boolean>(true)
+const loading = ref(true)
 
-const getUserData = () => {
+const getProfileData = async () => {
   try {
-    const { data: _user }: any = useApiFetch(`users/${id}`)
-    user.value = _user?.value?.data
-
-    loading.value = false
+    await $profileStore.userPersonalData(id)
+    await $profileStore.userAchievements(id)
+    await $profileStore.userResults(id)
   } catch (error) {
     console.log(error)
+  } finally {
+    loading.value = false
   }
 }
 
 onMounted(() => {
-  getUserData()
+  getProfileData()
 })
 </script>
 
@@ -28,12 +29,15 @@ onMounted(() => {
       <div>
         <div class="flex flex-col gap-4">
           <div>
-            <ProfilePicture class="w-[15.625rem] h-[15.625rem] mb-4" />
+            <ProfilePicture
+              :image="$profileStore.user?.image"
+              class="w-[15.625rem] h-[15.625rem] mb-4"
+            />
             <p class="text-slate-900 text-2xl font-bold capitalize tracking-wider">
-              {{ user?.name }}
+              {{ $profileStore.user?.name }}
             </p>
             <p class="text-slate-700 tracking-wider">
-              {{ user?.bio }}
+              {{ $profileStore.user?.bio }}
             </p>
           </div>
         </div>
@@ -41,7 +45,10 @@ onMounted(() => {
         <span class="w-[280px] block h-[3px] bg-gray-400 my-6 rounded"></span>
 
         <div>
-          <p>Pontuação total: <span class="font-bold">0</span></p>
+          <p class="capitalize">
+            pontuação total:
+            <span class="font-bold">{{ $profileStore.totalPoints }}</span>
+          </p>
         </div>
       </div>
 
@@ -53,7 +60,12 @@ onMounted(() => {
         </div>
 
         <div class="grid grid-cols-2 gap-4">
-          <AchievementItem text="pronto para jogar" date="15/15/2023" />
+          <AchievementItem
+            v-for="{ id, achievementType, unlockedAt } in $profileStore.achievements"
+            :key="id"
+            :text="achievementType"
+            :date="unlockedAt"
+          />
         </div>
       </div>
     </div>

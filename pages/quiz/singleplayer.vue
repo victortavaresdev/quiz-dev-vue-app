@@ -13,7 +13,7 @@ const questionsLeft = ref(3)
 
 const loading = ref(true)
 
-const timeLeft = ref(10)
+const timeLeft = ref(15)
 const timerInterval: any = ref(null)
 
 const currentQuestion = computed(() => questions.value[currentIndex.value])
@@ -57,14 +57,14 @@ onMounted(() => {
 
 const submitAnswer = () => {
   if (selectedOption.value === currentQuestion.value.correctAnswer) {
-    score.value++
+    score.value += 3
   }
 
   if (currentIndex.value + 1 < totalQuestions.value) {
     currentIndex.value++
     questionsLeft.value--
     selectedOption.value = null
-    timeLeft.value = 10
+    timeLeft.value = 15
   } else {
     isFinished.value = true
     clearInterval(timerInterval.value)
@@ -89,7 +89,7 @@ const getNewQuiz = () => {
   selectedOption.value = null
   score.value = 0
   questionsLeft.value = 3
-  timeLeft.value = 10
+  timeLeft.value = 15
   isFinished.value = false
   loading.value = true
 
