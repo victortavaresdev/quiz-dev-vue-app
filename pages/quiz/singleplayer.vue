@@ -11,6 +11,8 @@ const score = ref(0)
 const isFinished = ref(false)
 const questionsLeft = ref(3)
 
+const loading = ref(true)
+
 const timeLeft = ref(10)
 const timerInterval: any = ref(null)
 
@@ -19,16 +21,28 @@ const totalQuestions = computed(() => questions.value.length)
 const currentUser = computed(() => ($authStore.user ? $authStore.user.name : 'visitante'))
 
 const getRandomQuizByCategory = async () => {
-  const { data: _quiz }: any = await useApiFetch(`categories/${categoria}/random-quiz`)
-  quiz.value = _quiz.value.data.slug
+  try {
+    const { data: _quiz }: any = await useApiFetch(`categories/${categoria}/random-quiz`)
+    quiz.value = _quiz.value.data.slug
 
-  getQuestions()
-  startTimer()
+    getQuestions()
+    startTimer()
+  } catch (error) {
+    console.log(error)
+    loading.value = false
+  }
 }
 
 const getQuestions = async () => {
-  const { data: _questions }: any = await useApiFetch(`quizzes/${quiz.value}/questions`)
-  questions.value = _questions.value.data
+  try {
+    const { data: _questions }: any = await useApiFetch(`quizzes/${quiz.value}/questions`)
+    questions.value = _questions.value.data
+
+    loading.value = false
+  } catch (error) {
+    console.log(error)
+    loading.value = false
+  }
 }
 
 const startTimer = () => {
@@ -78,6 +92,7 @@ const getNewQuiz = () => {
   questionsLeft.value = 3
   timeLeft.value = 10
   isFinished.value = false
+  loading.value = true
 
   getRandomQuizByCategory()
 }
@@ -85,7 +100,9 @@ const getNewQuiz = () => {
 
 <template>
   <section class="w-full min-h-[90vh] bg-slate-100">
-    <div class="pt-16">
+    <LoadingBar v-if="loading" />
+
+    <div class="pt-16" v-else>
       <div
         v-if="!isFinished"
         class="bg-white w-full max-w-2xl shadow-[0_0_3px_1px] shadow-slate-200 mx-auto my-0"

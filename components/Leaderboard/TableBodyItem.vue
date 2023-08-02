@@ -5,7 +5,7 @@ defineProps<{
   image: string | null
   ranking: number
   quizzes: string
-  totalScore: string | null
+  totalScore: number | null
 }>()
 </script>
 

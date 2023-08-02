@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const users = ref<LeaderboardProps | []>([])
+const users = ref<LeaderboardProps[]>([])
 const currentPage = ref<number>(1)
 const paginationMeta = ref<any>(null)
 
