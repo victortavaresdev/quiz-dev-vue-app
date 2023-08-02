@@ -37,10 +37,9 @@ const getQuestions = async () => {
   try {
     const { data: _questions }: any = await useApiFetch(`quizzes/${quiz.value}/questions`)
     questions.value = _questions.value.data
-
-    loading.value = false
   } catch (error) {
     console.log(error)
+  } finally {
     loading.value = false
   }
 }
