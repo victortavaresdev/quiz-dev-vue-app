@@ -20,7 +20,7 @@ const userMenu = ref(false)
             <NuxtLink to="/" class="tracking-wider hover:underline">Home</NuxtLink>
           </li>
           <li class="tracking-wider">
-            <NuxtLink to="/quizzes" class="tracking-wider hover:underline">Quiz</NuxtLink>
+            <NuxtLink to="/modos-do-quiz" class="tracking-wider hover:underline">Quiz</NuxtLink>
           </li>
           <li>
             <NuxtLink class="tracking-wider hover:underline" to="/leaderboard"

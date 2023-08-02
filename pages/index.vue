@@ -11,7 +11,7 @@
 
       <div class="flex justify-center items-center gap-4 mb-32">
         <NuxtLink
-          to="quizzes"
+          to="/modos-do-quiz"
           class="p-4 bg-emerald-800 hover:bg-emerald-600 duration-300 text-white text-center rounded w-48 inline-block"
         >
           Começar o Quiz

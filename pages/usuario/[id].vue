@@ -1,14 +1,16 @@
 <script setup lang="ts">
-const { id }: any = useRoute().params
+const { id } = useRoute().params
 const { $profileStore } = useNuxtApp()
 
 const loading = ref(true)
 
+const userId = id as string
+
 const getProfileData = async () => {
   try {
-    await $profileStore.userPersonalData(id)
-    await $profileStore.userAchievements(id)
-    await $profileStore.userResults(id)
+    await $profileStore.userPersonalData(userId)
+    await $profileStore.userAchievements(userId)
+    await $profileStore.userResults(userId)
   } catch (error) {
     console.log(error)
   } finally {
@@ -47,7 +49,7 @@ onMounted(() => {
         <div>
           <p class="capitalize">
             pontuação total:
-            <span class="font-bold">{{ $profileStore.totalPoints }}</span>
+            <span class="font-bold">{{ $profileStore?.totalPoints }}</span>
           </p>
         </div>
       </div>
@@ -61,7 +63,7 @@ onMounted(() => {
 
         <div class="grid grid-cols-2 gap-4">
           <AchievementItem
-            v-for="{ id, achievementType, unlockedAt } in $profileStore.achievements"
+            v-for="{ id, achievementType, unlockedAt } in $profileStore?.achievements"
             :key="id"
             :text="achievementType"
             :date="unlockedAt"

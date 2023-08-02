@@ -192,7 +192,7 @@ const getNewQuiz = () => {
             novo quiz
           </button>
           <NuxtLink
-            to="/quizzes"
+            to="/modos-do-quiz"
             class="p-2 bg-gray-300 hover:bg-gray-400 duration-300 rounded capitalize text-slate-900"
           >
             voltar

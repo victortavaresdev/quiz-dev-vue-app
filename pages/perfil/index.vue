@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const { $authStore, $profileStore } = useNuxtApp()
 
-const userId: any = $authStore?.user?.id
+const loading = ref(true)
+
+const userId = $authStore.user?.id as string
 
 const formData: any = reactive({
   name: $authStore.user?.name,
@@ -12,9 +14,15 @@ const formData: any = reactive({
 const editProfile = ref(false)
 const deleteUserModal = ref(false)
 
-const getProfileData = () => {
-  $profileStore.userAchievements(userId)
-  $profileStore.userResults(userId)
+const getProfileData = async () => {
+  try {
+    await $profileStore.userAchievements(userId)
+    await $profileStore.userResults(userId)
+  } catch (error) {
+    console.log(error)
+  } finally {
+    loading.value = false
+  }
 }
 
 onMounted(() => {
@@ -37,7 +45,9 @@ definePageMeta({
 
 <template>
   <section class="w-full min-h-[90vh] bg-slate-100">
-    <div class="flex gap-6 p-8">
+    <LoadingBar v-if="loading" />
+
+    <div class="flex gap-6 p-8" v-else>
       <div>
         <div class="flex flex-col gap-4" v-if="!editProfile">
           <div>
