@@ -29,7 +29,7 @@ const getCategory = async () => {
         class="border-gray-400 border rounded-lg p-2 outline-none w-full"
       >
         <option disabled value="">Selecione</option>
-        <option v-for="{ id, name, slug } in categories?.data" :key="id" :value="slug">
+        <option v-for="{ id, name, slug } in categories" :key="id" :value="slug">
           {{ name }}
         </option>
       </select>

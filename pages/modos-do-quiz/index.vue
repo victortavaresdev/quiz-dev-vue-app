@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const categories: any = ref<CategoriesProps[]>([])
+const categories = ref<CategoriesProps[]>([])
 
 const getCategoriesData = async () => {
-  const { data: _categories } = await useApiFetch('categories')
-  categories.value = _categories.value as CategoriesProps[]
+  const { data: _categories }: any = await useApiFetch('categories')
+  categories.value = _categories.value?.data
 }
 
 onMounted(() => {

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-const leaderboard: any = ref<LeaderboardProps[]>([])
+const leaderboard = ref<LeaderboardProps[]>([])
 const currentPage = ref(1)
-const paginationMeta: any = ref<PaginationMeta | {}>({})
+const paginationMeta: any = ref<Partial<PaginationMeta> | {}>({})
 
 const loading = ref(true)
 
 const getLeaderboardData = async () => {
   try {
-    const { data: _leaderboard } = await useApiFetch(`leaderboard?page=${currentPage.value}`)
+    const { data: _leaderboard }: any = await useApiFetch(`leaderboard?page=${currentPage.value}`)
 
-    leaderboard.value = _leaderboard.value as LeaderboardProps[]
-    paginationMeta.value = _leaderboard.value as PaginationMeta
+    leaderboard.value = _leaderboard.value?.data
+    paginationMeta.value = _leaderboard.value?.meta
   } catch (error) {
     console.log(error)
   } finally {
@@ -43,7 +43,7 @@ const changePage = (page: number) => {
             </thead>
             <tbody>
               <TableBodyItem
-                v-for="({ id, user, image, totalQuizzes, totalScore }, index) in leaderboard?.data"
+                v-for="({ id, user, image, totalQuizzes, totalScore }, index) in leaderboard"
                 :key="id"
                 :id="id"
                 :user="user"
@@ -58,7 +58,7 @@ const changePage = (page: number) => {
 
         <div class="flex items-center justify-center gap-4">
           <div class="text-sm text-gray-800 font-bold">
-            Página {{ currentPage }} de {{ paginationMeta?.meta?.last_page }}
+            Página {{ currentPage }} de {{ paginationMeta?.last_page }}
           </div>
           <div class="text-sm text-gray-600 flex gap-2">
             <button
@@ -77,15 +77,15 @@ const changePage = (page: number) => {
             </button>
             <button
               class="w-7 h-7 hover:bg-slate-300 duration-300 border-slate-400 border rounded"
-              :disabled="currentPage === paginationMeta?.meta?.last_page"
+              :disabled="currentPage === paginationMeta?.last_page"
               @click="changePage(currentPage + 1)"
             >
               >
             </button>
             <button
               class="w-7 h-7 hover:bg-slate-300 duration-300 border-slate-400 border rounded"
-              :disabled="currentPage === paginationMeta?.meta?.last_page"
-              @click="changePage(paginationMeta?.meta?.last_page)"
+              :disabled="currentPage === paginationMeta?.last_page"
+              @click="changePage(paginationMeta?.last_page)"
             >
               >>
             </button>

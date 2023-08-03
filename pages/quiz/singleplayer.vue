@@ -36,7 +36,7 @@ const getRandomQuizByCategory = async () => {
 const getQuestions = async () => {
   try {
     const { data: _questions }: any = await useApiFetch(`quizzes/${quiz.value}/questions`)
-    questions.value = _questions.value.data
+    questions.value = _questions.value?.data
   } catch (error) {
     console.log(error)
   } finally {
@@ -165,7 +165,7 @@ const getNewQuiz = () => {
 
       <div
         v-else
-        class="bg-white w-full max-w-lg p-4 shadow-[0_0_3px_1px] shadow-slate-200 mx-auto my-0 flex flex-col gap-4"
+        class="bg-white w-full max-w-lg p-4 shadow-[0_0_3px_1px] shadow-slate-200 mx-auto y-0 flex flex-col gap-4"
       >
         <div class="p-4 bg-gray-200">
           <h2 class="text-center text-2xl">Resultado do Quiz</h2>

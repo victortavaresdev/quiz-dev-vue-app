@@ -6,7 +6,7 @@
       </h1>
       <p class="text-slate-600 text-center mb-8">
         QuizDev é uma plataforma de quizzes focado em programação. Teste agora seus conhecimentos
-        técnicos e suba no ranking.
+        técnicos e suba no ranking do Leaderboard.
       </p>
 
       <div class="flex justify-center items-center gap-4 mb-32">
@@ -14,7 +14,7 @@
           to="/modos-do-quiz"
           class="p-4 bg-emerald-800 hover:bg-emerald-600 duration-300 text-white text-center rounded w-48 inline-block"
         >
-          Começar o Quiz
+          Modos de Jogo
         </NuxtLink>
       </div>
     </div>
