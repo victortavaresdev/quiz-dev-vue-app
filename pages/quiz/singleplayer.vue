@@ -77,7 +77,6 @@ const postUserScore = async () => {
     await useApiFetch('results', {
       method: 'POST',
       body: {
-        taken_time: 120,
         total_points: score.value
       }
     })
