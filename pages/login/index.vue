@@ -39,14 +39,10 @@ const handleLogin = async () => {
           placeholder="Digite sua senha"
         />
 
-        <NuxtLink to="esqueci-senha" class="text-gray-600 text-sm text-right cursor-pointer"
-          >Esqueci a senha</NuxtLink
-        >
-
-        <FormButton text="Entrar" />
+        <FormButton text="Entrar" class="mt-4" />
       </form>
 
-      <span class="w-full h-[1px] block bg-slate-400 my-6"></span>
+      <span class="w-full h-[1px] block bg-slate-300 my-4"></span>
 
       <div class="flex justify-center items-center">
         <p class="text-sm text-gray-600 mr-2">Não tem conta cadastrada?</p>
