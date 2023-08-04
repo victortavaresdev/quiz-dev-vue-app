@@ -23,7 +23,7 @@ const currentUser = computed(() => ($authStore.user ? $authStore.user.name : 'vi
 const getRandomQuizByCategory = async () => {
   try {
     const { data: _quiz }: any = await useApiFetch(`categories/${categoria}/random-quiz`)
-    quiz.value = _quiz.value.data.slug
+    quiz.value = _quiz.value?.data.slug
 
     getQuestions()
     startTimer()

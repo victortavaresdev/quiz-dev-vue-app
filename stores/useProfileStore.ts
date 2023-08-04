@@ -15,7 +15,7 @@ export const useProfileStore = defineStore('profile', () => {
 
   const userResults = async (userId: string) => {
     const { data: _results }: any = await useApiFetch(`results/${userId}`)
-    totalPoints.value = _results.value?.totalPoints
+    totalPoints.value = _results.value?.data
   }
 
   return {

@@ -15,6 +15,8 @@ const handleResetPassword = async () => {
     body: formData
   })
 
+  console.log(error)
+
   if (error) {
     errorMessage.value = error.value?.data['message']
     setTimeout(() => (errorMessage.value = ''), 3000)

@@ -14,7 +14,7 @@ defineProps<{
     <td class="p-4 text-gray-800 align-middle">{{ ranking + 1 }}</td>
     <td class="p-4 text-gray-800 align-middle flex items-center gap-2">
       <ProfilePicture :image="image" class="w-[1.5rem] h-[1.5rem]" />
-      <NuxtLink :to="`/usuario/${id}`">{{ user }}</NuxtLink>
+      <NuxtLink :to="`/usuario/${id}`" class="capitalize">{{ user }}</NuxtLink>
     </td>
     <td class="p-4 text-gray-800 align-middle">{{ totalQuizzes }}</td>
     <td class="p-4 text-gray-800 align-middle">{{ totalScore }}</td>

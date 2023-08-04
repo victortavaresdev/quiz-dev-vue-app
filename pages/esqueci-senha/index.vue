@@ -6,12 +6,14 @@ const message = reactive({
 })
 
 const handleForgotPassword = async () => {
-  const { data, error } = await useApiFetch('auth/forgot-password', {
+  const { data, error }: any = await useApiFetch('auth/forgot-password', {
     method: 'POST',
     body: {
       email
     }
   })
+
+  console.log(error)
 
   if (error) {
     message.text = error.value?.data['message']
@@ -20,7 +22,7 @@ const handleForgotPassword = async () => {
   }
 
   if (data.value) {
-    message.text = 'Email enviado com sucesso.'
+    message.text = data.value?.message
     message.isError = false
     setTimeout(() => (message.text = ''), 3000)
   }
