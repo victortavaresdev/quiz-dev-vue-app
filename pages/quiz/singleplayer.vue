@@ -9,7 +9,7 @@ const currentIndex = ref(0)
 const selectedOption = ref(null)
 const score = ref(0)
 const isFinished = ref(false)
-const questionsLeft = ref(3)
+const questionsLeft = ref(5)
 
 const loading = ref(true)
 

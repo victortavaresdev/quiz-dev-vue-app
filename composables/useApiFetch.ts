@@ -9,9 +9,9 @@ export const useApiFetch = <T>(path: string, options?: UseFetchOptions<T>) => {
     headers.Authorization = `Bearer ${accessToken}`
   }
 
-  return useFetch(`https://quizdev.up.railway.app/api/v1/${path}`, {
+  return useFetch(`http://localhost:8000/api/v1/${path}`, {
     credentials: 'include',
-    baseURL: 'https://quizdev.up.railway.app',
+    baseURL: 'http://localhost:8000',
     watch: false,
     ...options,
     headers: {
