@@ -15,9 +15,9 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <section class="w-full min-h-[90vh] bg-slate-100 flex justify-center">
+  <section class="w-full min-h-[90vh] bg-slate-100 dark:bg-gray-900 flex justify-center">
     <div
-      class="bg-white max-w-sm h-min text-2xl my-12 p-8 rounded shadow-[0_0_3px_1px] shadow-slate-200"
+      class="bg-white dark:bg-gray-900 w-full max-w-sm h-min text-2xl my-12 p-8 rounded shadow-[0_0_3px_1px] shadow-slate-200 dark:shadow-[0_0_2px_1px] dark:shadow-gray-700"
     >
       <FormTitle text="Logar com sua conta" />
 
@@ -42,11 +42,13 @@ const handleLogin = async () => {
         <FormButton text="Entrar" class="mt-4" />
       </form>
 
-      <span class="w-full h-[1px] block bg-slate-300 my-4"></span>
+      <span class="w-full h-[1px] block bg-slate-300 dark-gray-700 dark:bg-gray-700 my-6"></span>
 
       <div class="flex justify-center items-center">
-        <p class="text-sm text-gray-600 mr-2">Não tem conta cadastrada?</p>
-        <NuxtLink to="/cadastro" class="text-emerald-600 text-sm tracking-wider"
+        <span class="text-sm text-gray-600 dark:text-gray-400 mr-2">Não tem conta cadastrada?</span>
+        <NuxtLink
+          to="/cadastro"
+          class="text-emerald-600 dark:text-emerald-400 text-sm tracking-wider"
           >Cadastro
         </NuxtLink>
       </div>

@@ -13,14 +13,16 @@ defineProps<{
 
 <template>
   <div>
-    <label :for="id" class="text-gray-500 capitalize text-base">{{ label }}</label>
+    <label :for="id" class="text-gray-600 dark:text-gray-400 capitalize text-base">{{
+      label
+    }}</label>
     <input
       :id="id"
       :type="type"
       :value="modelValue"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       :placeholder="placeholder"
-      class="w-full h-10 p-4 rounded block border-gray-300 border outline-none placeholder:text-sm"
+      class="w-full h-10 p-4 rounded block text-sm border-gray-300 dark:border-gray-700 dark:text-white dark:bg-gray-900 border outline-none placeholder:text-sm"
       :disabled="disabled"
       required
     />
