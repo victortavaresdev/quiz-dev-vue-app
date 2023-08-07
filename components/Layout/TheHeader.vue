@@ -51,18 +51,13 @@ const userMenu = ref(false)
 
         <UserMenu v-show="userMenu" />
       </div>
-      <div class="flex items-center gap-3" v-else>
+      <div v-else>
         <NuxtLink
           to="/login"
-          class="text-slate-900 dark:text-white dark:hover:bg-gray-800 dark:border-gray-700 border-gray-300 border hover:bg-gray-100 font-bold text-sm duration-300 px-4 py-2 rounded tracking-wider"
-          >Login</NuxtLink
+          class="text-slate-900 dark:text-white flex items-center gap-1 dark:hover:bg-gray-800 dark:border-gray-700 border-gray-300 border hover:bg-gray-100 font-bold text-sm duration-300 px-4 py-2 rounded tracking-wider"
         >
-        <!-- <NuxtLink
-          to="/cadastro"
-          class="bg-emerald-800 hover:bg-emerald-700 duration-300 text-white rounded px-4 py-2 tracking-wider"
+          <Icon name="solar:login-line-duotone" size="1.25rem" />Login</NuxtLink
         >
-          Cadastre-se
-        </NuxtLink> -->
       </div>
     </div>
   </header>
