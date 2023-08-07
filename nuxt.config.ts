@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-icon'],
+  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-icon', '@vueuse/nuxt'],
   components: [{ path: '~/components', pathPrefix: false }],
   pinia: {
     autoImports: [
@@ -24,7 +24,7 @@ export default defineNuxtConfig({
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=League+Spartan&display=swap'
+          href: 'https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=League+Spartan&family=Montserrat:wght@400;700&display=swap'
         }
       ]
     }
