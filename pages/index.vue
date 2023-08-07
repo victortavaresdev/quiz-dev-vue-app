@@ -12,7 +12,7 @@
       <div class="flex justify-center items-center gap-4 mb-32">
         <NuxtLink
           to="/modos-do-quiz"
-          class="p-4 bg-emerald-800 hover:bg-emerald-700 duration-300 text-white text-center rounded w-48 inline-block"
+          class="p-4 bg-emerald-600 hover:bg-emerald-500 duration-300 text-white text-center rounded w-48 inline-block"
         >
           Modos do Quiz
         </NuxtLink>

@@ -16,27 +16,40 @@ const getCategory = async () => {
 </script>
 
 <template>
-  <div class="p-6 border-gray-400 border-2 rounded-xl">
-    <Icon name="mdi:account" size="3rem" class="w-full mx-auto my-0 text-slate-800" />
-    <h2 class="text-center text-3xl text-slate-800 font-['Bruno_Ace_SC']">Single player</h2>
-    <p class="text-center text-gray-600 mb-4">Teste os seus conhecimentos com um quiz aleatório.</p>
+  <div class="p-6 border-gray-400 dark:border-gray-600 dark:bg-gray-800 border-2 rounded-xl">
+    <Icon
+      name="mdi:account"
+      size="3rem"
+      class="w-full mx-auto my-0 text-slate-800 dark:text-white"
+    />
+    <h2 class="text-center text-3xl text-slate-800 dark:text-white font-['Bruno_Ace_SC']">
+      Single player
+    </h2>
+    <p class="text-center text-gray-600 dark:text-gray-400 mb-4">
+      Teste os seus conhecimentos com um quiz aleatório.
+    </p>
 
     <div class="flex items-center justify-between gap-2">
       <select
         name="quizzes"
         id="quizzes"
         v-model="categoryChosen"
-        class="border-gray-400 border rounded-lg p-2 outline-none w-full"
+        class="border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:hover:bg-gray-700 dark:text-white border cursor-pointer duration-300 rounded-lg p-2 outline-none w-full"
       >
-        <option disabled value="">Selecione</option>
-        <option v-for="{ id, name, slug } in categories" :key="id" :value="slug">
+        <option disabled value="" class="dark:text-white">Selecione</option>
+        <option
+          v-for="{ id, name, slug } in categories"
+          :key="id"
+          :value="slug"
+          class="dark:text-white"
+        >
           {{ name }}
         </option>
       </select>
 
       <button
         @click="getCategory"
-        class="bg-emerald-600 hover:bg-emerald-800 duration-300 text-white rounded-lg p-2 w-full capitalize"
+        class="bg-emerald-600 hover:bg-emerald-500 duration-300 text-white rounded-lg p-2 w-full capitalize"
       >
         iniciar quiz
       </button>
