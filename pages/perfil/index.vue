@@ -1,7 +1,5 @@
 <script setup lang="ts">
-const { $authStore, $profileStore } = useNuxtApp()
-
-const loading = ref(true)
+const { $authStore, $profileStore, $generalStore } = useNuxtApp()
 
 const userId = $authStore.user?.id as string
 
@@ -11,9 +9,6 @@ const formData: any = reactive({
   image: $authStore.user?.image
 })
 
-const editProfile = ref(false)
-const deleteUserModal = ref(false)
-
 const getProfileData = async () => {
   try {
     await $profileStore.userAchievements(userId)
@@ -21,7 +16,7 @@ const getProfileData = async () => {
   } catch (error) {
     console.log(error)
   } finally {
-    loading.value = false
+    $generalStore.loading = false
   }
 }
 
@@ -31,11 +26,7 @@ onMounted(() => {
 
 const handleUpdate = async () => {
   await $authStore.updateUser(formData)
-  editProfile.value = false
-}
-
-const handleDelete = async () => {
-  await $authStore.deleteUser()
+  $generalStore.editUserProfile = false
 }
 
 definePageMeta({
@@ -44,65 +35,43 @@ definePageMeta({
 </script>
 
 <template>
-  <section class="w-full min-h-[90vh] bg-slate-100">
-    <LoadingBar v-if="loading" />
+  <section class="w-full min-h-[90vh] bg-slate-100 dark:bg-gray-900">
+    <LoadingBar v-if="$generalStore.loading" />
 
     <div class="flex gap-6 p-8" v-else>
       <div>
-        <div class="flex flex-col gap-4" v-if="!editProfile">
+        <div class="flex flex-col gap-4" v-if="!$generalStore.editUserProfile">
           <div>
             <ProfilePicture
               :image="$authStore.user?.image"
               class="w-[15.625rem] h-[15.625rem] mb-4"
             />
 
-            <p class="text-slate-900 text-2xl font-bold capitalize tracking-wider">
+            <p class="text-slate-900 dark:text-white text-2xl font-bold capitalize tracking-wider">
               {{ $authStore.user?.name }}
             </p>
-            <p class="text-slate-700 tracking-wider">
+            <p class="text-slate-700 dark:text-gray-400 tracking-wider">
               {{ $authStore.user?.bio }}
             </p>
           </div>
 
           <div class="flex gap-4">
             <button
-              class="bg-gray-500 text-sm hover:bg-gray-600 duration-300 p-2 text-white capitalize rounded"
-              @click="() => (editProfile = !editProfile)"
+              class="bg-white dark:bg-gray-900 dark:text-white text-sm text-slate-900 hover:bg-gray-200 dark:hover:bg-gray-800 duration-300 border-gray-300 dark:border-gray-700 border p-2 capitalize rounded"
+              @click="() => ($generalStore.editUserProfile = !$generalStore.editUserProfile)"
             >
               <Icon name="material-symbols:edit-sharp" size="1.25rem" />
               editar perfil
             </button>
             <button
-              class="bg-red-600 text-sm hover:bg-red-700 duration-300 p-2 text-white capitalize rounded"
-              @click="deleteUserModal = true"
+              class="bg-white dark:bg-gray-900 dark:text-white text-slate-900 text-sm hover:bg-red-700 dark:hover:bg-red-600 dark:hover:border-none hover:text-white duration-300 border-gray-300 dark:border-gray-700 border p-2 capitalize rounded"
+              @click="$generalStore.deleteUserModal = true"
             >
               <Icon name="material-symbols:delete" size="1.25rem" />
               deletar conta
             </button>
 
-            <div
-              v-show="deleteUserModal"
-              class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-6 bg-gray-800 rounded z-10"
-            >
-              <div class="mb-4">
-                <h3 class="text-white">Tem certeza que deseja deletar a conta?</h3>
-              </div>
-
-              <div class="flex flex-col gap-2">
-                <button
-                  class="w-full bg-red-600 hover:bg-red-700 duration-300 text-sm p-2 text-white capitalize rounded"
-                  @click="handleDelete"
-                >
-                  confirmar
-                </button>
-                <button
-                  class="w-full bg-yellow-500 hover:bg-yellow-600 duration-300 text-sm p-2 text-slate-800 capitalize rounded"
-                  @click="deleteUserModal = false"
-                >
-                  cancelar
-                </button>
-              </div>
-            </div>
+            <DeleteUserModal v-show="$generalStore.deleteUserModal" />
           </div>
         </div>
 
@@ -139,7 +108,7 @@ definePageMeta({
             </button>
             <button
               class="bg-gray-600 text-sm hover:bg-gray-700 duration-300 p-2 text-white capitalize rounded"
-              @click="() => (editProfile = false)"
+              @click="() => ($generalStore.editUserProfile = false)"
             >
               Cancelar
             </button>
@@ -149,7 +118,7 @@ definePageMeta({
         <span class="w-[280px] block h-[3px] bg-gray-400 my-6 rounded"></span>
 
         <div>
-          <p>
+          <p class="dark:text-white">
             Pontuação Total: <span class="font-bold">{{ $profileStore.totalPoints }}</span>
           </p>
         </div>
@@ -157,7 +126,9 @@ definePageMeta({
 
       <div class="w-full px-8 py-4 flex flex-col gap-8">
         <div>
-          <h2 class="text-center text-3xl uppercase font-['Bruno_Ace_SC'] text-emerald-800">
+          <h2
+            class="text-center text-3xl uppercase font-['Bruno_Ace_SC'] text-emerald-800 dark:text-emerald-400"
+          >
             conquistas
           </h2>
         </div>

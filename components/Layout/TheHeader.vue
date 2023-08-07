@@ -13,13 +13,13 @@ const userMenu = ref(false)
       <HeaderNav />
     </div>
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-3">
       <DarkMode />
 
       <div
         v-if="$authStore.user"
         @click="() => (userMenu = !userMenu)"
-        class="relative text-slate-900 px-2 py-1 flex items-center gap-2 h-[36px] cursor-pointer hover:bg-gray-300 duration-300 rounded"
+        class="relative text-slate-900 dark:text-white px-4 py-2 flex items-center gap-2 h-[36px] cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-800 duration-300 rounded"
       >
         <ProfilePicture :image="$authStore.user?.image" class="w-[1.625rem] h-[1.625rem]" />
         <span class="text-sm capitalize"> {{ $authStore.user?.name }} </span>

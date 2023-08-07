@@ -18,7 +18,7 @@
         </NuxtLink>
         <NuxtLink
           to="/sobre"
-          class="p-4 border-slate-800 border dark:hover:border-emerald-400 hover:border-emerald-600 dark:border-gray-700 dark:text-white dark:hover:text-emerald-400 hover:text-emerald-600 duration-300 text-slate-800 text-center rounded w-48 inline-block"
+          class="p-4 border-gray-400 border dark:hover:border-emerald-400 hover:border-emerald-600 dark:border-gray-700 dark:text-white dark:hover:text-emerald-400 hover:text-emerald-600 duration-300 text-slate-800 text-center rounded w-48 inline-block"
         >
           Regras do Jogo
         </NuxtLink>
