@@ -9,9 +9,9 @@ export const useApiFetch = <T>(path: string, options?: UseFetchOptions<T>) => {
     headers.Authorization = `Bearer ${accessToken}`
   }
 
-  return useFetch(`https://quiz-dev.up.railway.app/api/v1/${path}`, {
+  return useFetch(`https://quiz-dev-api.onrender.com/api/v1/${path}`, {
     credentials: 'include',
-    baseURL: 'https://quiz-dev.up.railway.app',
+    baseURL: 'https://quiz-dev-api.onrender.com',
     watch: false,
     ...options,
     headers: {
