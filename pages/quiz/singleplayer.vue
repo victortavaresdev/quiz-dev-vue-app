@@ -1,109 +1,34 @@
 <script setup lang="ts">
-const { $authStore, $generalStore } = useNuxtApp()
+const { $authStore, $quizStore } = useNuxtApp()
+
 const { categoria } = useRoute().query
 
-const quiz = ref('')
-const questions = ref<QuestionProps[]>([])
-
-const currentIndex = ref(0)
-const selectedOption = ref(null)
-const score = ref(0)
-const isFinished = ref(false)
-const questionsLeft = ref(5)
-
-const timeLeft = ref(15)
-const timerInterval: any = ref(null)
-
-const currentQuestion = computed(() => questions.value[currentIndex.value])
-const totalQuestions = computed(() => questions.value.length)
 const currentUser = computed(() => ($authStore.user ? $authStore.user.name : 'visitante'))
-const buttonText = computed(() => (selectedOption ? 'Próxima Pergunta' : 'Escolha uma opção'))
-
-const getRandomQuizByCategory = async () => {
-  try {
-    $generalStore.loading = true
-
-    const { data: _quiz }: any = await useApiFetch(`categories/${categoria}/random-quiz`)
-    quiz.value = _quiz.value?.data.slug
-
-    getQuestions()
-    startTimer()
-  } catch (error) {
-    console.log(error)
-    $generalStore.loading = false
-  }
-}
-
-const getQuestions = async () => {
-  try {
-    const { data: _questions }: any = await useApiFetch(`quizzes/${quiz.value}/questions`)
-    questions.value = _questions.value?.data
-  } catch (error) {
-    console.log(error)
-  } finally {
-    $generalStore.loading = false
-  }
-}
-
-const startTimer = () => {
-  timerInterval.value = setInterval(() => {
-    if (timeLeft.value > 0) timeLeft.value--
-    else submitAnswer()
-  }, 1000)
-}
 
 onMounted(() => {
-  getRandomQuizByCategory()
+  $quizStore.getRandomQuizByCategory(categoria as string)
 })
 
-const submitAnswer = () => {
-  if (selectedOption.value === currentQuestion.value.correctAnswer) {
-    score.value += 3
-  }
-
-  if (currentIndex.value + 1 < totalQuestions.value) {
-    currentIndex.value++
-    questionsLeft.value--
-    selectedOption.value = null
-    timeLeft.value = 15
-  } else {
-    isFinished.value = true
-    clearInterval(timerInterval.value)
-    postUserScore()
-  }
-}
-
-const postUserScore = async () => {
-  if ($authStore.user) {
-    await useApiFetch('results', {
-      method: 'POST',
-      body: {
-        total_points: score.value
-      }
-    })
-  }
-}
-
 const getNewQuiz = () => {
-  currentIndex.value = 0
-  selectedOption.value = null
-  score.value = 0
-  questionsLeft.value = 5
-  timeLeft.value = 15
-  isFinished.value = false
-  $generalStore.loading = true
+  $quizStore.currentIndex = 0
+  $quizStore.selectedOption = null
+  $quizStore.score = 0
+  $quizStore.questionsLeft = 5
+  $quizStore.timeLeft = 15
+  $quizStore.isFinished = false
+  $quizStore.loading = true
 
-  getRandomQuizByCategory()
+  $quizStore.getRandomQuizByCategory(categoria as string)
 }
 </script>
 
 <template>
   <section class="w-full min-h-[90vh] bg-slate-100 dark:bg-gray-900">
-    <LoadingBar v-if="$generalStore.loading" />
+    <LoadingBar v-if="$quizStore.loading" />
 
     <div class="pt-16" v-else>
       <div
-        v-if="!isFinished"
+        v-if="!$quizStore.isFinished"
         class="bg-white dark:bg-gray-900 w-full max-w-2xl shadow-[0_0_3px_1px] shadow-slate-200 dark:shadow-[0_0_2px_1px] dark:shadow-gray-700 mx-auto my-0"
       >
         <div class="flex items-center justify-between p-4">
@@ -113,7 +38,7 @@ const getNewQuiz = () => {
           </div>
           <div>
             <p class="text-slate-900 dark:text-white text-sm">
-              Pontuação: <span class="font-bold">{{ score }}</span>
+              Pontuação: <span class="font-bold">{{ $quizStore.score }}</span>
             </p>
           </div>
         </div>
@@ -122,14 +47,14 @@ const getNewQuiz = () => {
           <div class="flex items-center justify-between mb-6">
             <div>
               <p class="text-sm uppercase font-bold text-gray-600 dark:text-gray-400">
-                {{ questionsLeft }} respostas restantes
+                {{ $quizStore.questionsLeft }} respostas restantes
               </p>
             </div>
             <div>
               <span class="text-sm uppercase font-bold text-gray-600 dark:text-gray-400"
                 >Tempo restante:
                 <span class="text-2xl text-emerald-600 dark:text-emerald-400">
-                  {{ timeLeft.toString().padStart(2, '0') }}
+                  {{ $quizStore.timeLeft.toString().padStart(2, '0') }}
                 </span>
               </span>
             </div>
@@ -137,18 +62,18 @@ const getNewQuiz = () => {
 
           <div class="mb-4">
             <span class="text-gray-700 dark:text-white text-lg">{{
-              currentQuestion?.question
+              $quizStore.currentQuestion?.question
             }}</span>
           </div>
 
           <ul class="flex flex-col gap-2 mb-4">
             <li
-              v-for="{ id, optionText } in currentQuestion?.options"
+              v-for="{ id, optionText } in $quizStore.currentQuestion?.options"
               :key="id"
               class="w-full p-2 bg-slate-200 hover:bg-slate-300 duration-300 text-slate-800 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
             >
               <label>
-                <input type="radio" :value="optionText" v-model="selectedOption" />
+                <input type="radio" :value="optionText" v-model="$quizStore.selectedOption" />
                 {{ optionText }}
               </label>
             </li>
@@ -157,14 +82,14 @@ const getNewQuiz = () => {
           <button
             class="text-white w-44 p-2"
             :class="
-              selectedOption
+              $quizStore.selectedOption
                 ? 'bg-emerald-600 dark:bg-emerald-400 dark:text-slate-900 cursor-pointer'
                 : 'bg-gray-500'
             "
-            @click="submitAnswer"
-            :disabled="!selectedOption"
+            @click="$quizStore.submitAnswer"
+            :disabled="!$quizStore.selectedOption"
           >
-            {{ buttonText }}
+            {{ $quizStore.buttonText }}
           </button>
         </div>
       </div>
@@ -185,7 +110,7 @@ const getNewQuiz = () => {
           <p class="text-center text-xl dark:text-white">
             Sua pontuação:
             <span class="font-bold text-emerald-800 dark:text-emerald-400 p-2">{{
-              score.toString().padStart(2, '0')
+              $quizStore.score.toString().padStart(2, '0')
             }}</span>
           </p>
         </div>
