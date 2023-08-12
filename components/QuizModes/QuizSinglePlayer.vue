@@ -16,7 +16,9 @@ const getCategory = async () => {
 </script>
 
 <template>
-  <div class="p-6 border-gray-400 dark:border-gray-600 dark:bg-gray-800 border-2 rounded-xl">
+  <div
+    class="p-6 bg-gray-100 border-gray-400 dark:border-gray-600 dark:bg-gray-800 border-2 rounded-xl"
+  >
     <Icon
       name="mdi:account"
       size="3rem"
@@ -34,7 +36,7 @@ const getCategory = async () => {
         name="quizzes"
         id="quizzes"
         v-model="categoryChosen"
-        class="border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:hover:bg-gray-700 dark:text-white border cursor-pointer duration-300 rounded-lg p-2 outline-none w-full"
+        class="bg-white border-gray-400 dark:border-gray-600 dark:bg-gray-900 dark:hover:bg-gray-700 dark:text-white border cursor-pointer duration-300 rounded-lg p-2 outline-none w-full"
       >
         <option disabled value="" class="dark:text-white">Selecione</option>
         <option

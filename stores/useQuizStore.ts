@@ -42,10 +42,12 @@ export const useQuizStore = defineStore('quiz', () => {
   }
 
   const startTimer = () => {
-    timerInterval.value = setInterval(() => {
-      if (timeLeft.value > 0) timeLeft.value--
-      else submitAnswer()
-    }, 1000)
+    if (!timerInterval.value) {
+      timerInterval.value = setInterval(() => {
+        if (timeLeft.value > 0) timeLeft.value--
+        else submitAnswer()
+      }, 1000)
+    }
   }
 
   const submitAnswer = () => {
@@ -74,9 +76,20 @@ export const useQuizStore = defineStore('quiz', () => {
     })
   }
 
+  const resetQuiz = () => {
+    currentIndex.value = 0
+    selectedOption.value = null
+    score.value = 0
+    questionsLeft.value = 5
+    timeLeft.value = 15
+    isFinished.value = false
+    loading.value = true
+  }
+
   return {
     getRandomQuizByCategory,
     submitAnswer,
+    resetQuiz,
     currentIndex,
     selectedOption,
     score,

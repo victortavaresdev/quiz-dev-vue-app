@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="p-6 border-gray-400 dark:border-gray-600 dark:bg-gray-800 border-2 rounded-xl">
+  <div
+    class="p-6 bg-gray-100 border-gray-400 dark:border-gray-600 dark:bg-gray-800 border-2 rounded-xl"
+  >
     <Icon
       name="mdi:account-multiple"
       size="3rem"

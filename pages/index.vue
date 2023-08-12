@@ -1,5 +1,5 @@
 <template>
-  <main class="w-full min-h-[90vh] dark:bg-gray-900 bg-slate-100 flex justify-center">
+  <main class="w-full min-h-[90vh] dark:bg-gray-900 bg-white flex justify-center">
     <div class="pt-32">
       <h1 class="text-slate-900 dark:text-white text-6xl mb-4 text-center max-w-4xl font-bold">
         Quizzes diários de programação e tecnologia.

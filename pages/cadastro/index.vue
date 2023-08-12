@@ -15,7 +15,7 @@ const handleRegister = async () => {
 </script>
 
 <template>
-  <section class="w-full min-h-[90vh] bg-slate-100 dark:bg-gray-900 flex justify-center">
+  <section class="w-full min-h-[90vh] bg-white dark:bg-gray-900 flex justify-center">
     <div
       class="bg-white dark:bg-gray-900 w-full max-w-sm h-min text-2xl my-12 p-8 rounded shadow-[0_0_3px_1px] shadow-slate-200 dark:shadow-[0_0_2px_1px] dark:shadow-gray-700"
     >

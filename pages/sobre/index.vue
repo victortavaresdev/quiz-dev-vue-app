@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <section class="w-full min-h-[90vh] bg-slate-100 dark:bg-gray-900">
+  <section class="w-full min-h-[90vh] bg-white dark:bg-gray-900">
     <div class="px-8 py-12 flex flex-col gap-6 w-full max-w-5xl">
       <TheHeading title="sobre" />
 

@@ -7,14 +7,7 @@ const props = defineProps<{
 const { $quizStore } = useNuxtApp()
 
 const getNewQuiz = () => {
-  $quizStore.currentIndex = 0
-  $quizStore.selectedOption = null
-  $quizStore.score = 0
-  $quizStore.questionsLeft = 5
-  $quizStore.timeLeft = 15
-  $quizStore.isFinished = false
-  $quizStore.loading = true
-
+  $quizStore.resetQuiz()
   $quizStore.getRandomQuizByCategory(props.category)
 }
 </script>
