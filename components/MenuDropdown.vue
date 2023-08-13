@@ -6,7 +6,7 @@ const auth = useAuthStore()
 
 <template>
   <div
-    class="absolute -bottom-[96px] w-28 rounded right-0 bg-gray-100 dark:bg-gray-900 z-10 p-1 border-gray-300 dark:border-gray-700 border"
+    class="absolute -bottom-[96px] w-28 rounded right-0 bg-white dark:bg-gray-900 z-10 p-1 border-gray-300 dark:border-gray-700 border"
   >
     <div
       class="flex items-center gap-2 text-slate-800 hover:bg-gray-300 dark:hover:bg-gray-800 duration-300 p-2 rounded w-full"

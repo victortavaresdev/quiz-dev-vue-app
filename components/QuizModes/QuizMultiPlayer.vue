@@ -10,7 +10,7 @@
       class="w-full mx-auto my-0 text-slate-800 dark:text-white"
     />
     <h2 class="text-center text-3xl text-slate-800 font-['Bruno_Ace_SC'] dark:text-white">
-      Multi player
+      Multiplayer
     </h2>
     <p class="text-center text-gray-600 dark:text-gray-400 mb-4">
       Teste os seus conhecimentos com outros devs online.

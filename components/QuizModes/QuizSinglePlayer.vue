@@ -25,7 +25,7 @@ const getCategory = async () => {
       class="w-full mx-auto my-0 text-slate-800 dark:text-white"
     />
     <h2 class="text-center text-3xl text-slate-800 dark:text-white font-['Bruno_Ace_SC']">
-      Single player
+      Singleplayer
     </h2>
     <p class="text-center text-gray-600 dark:text-gray-400 mb-4">
       Teste os seus conhecimentos com um quiz aleatório.
