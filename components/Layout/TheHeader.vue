@@ -8,7 +8,7 @@ const userMenu = ref(false)
   <header
     class="bg-white dark:bg-gray-900 text-slate-900 text-sm flex justify-between items-center px-12 py-4 h-[70px]"
   >
-    <div class="flex items-center gap-12">
+    <div class="flex items-center gap-16">
       <HeaderLogo />
       <HeaderNav />
     </div>

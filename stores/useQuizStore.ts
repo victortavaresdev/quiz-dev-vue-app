@@ -3,6 +3,7 @@ export const useQuizStore = defineStore('quiz', () => {
   const questions = ref<QuestionProps[]>([])
 
   const loading = ref(true)
+  const hasPostedScore = ref(false)
 
   const currentIndex = ref(0)
   const selectedOption = ref(null)
@@ -43,8 +44,11 @@ export const useQuizStore = defineStore('quiz', () => {
   const startTimer = () => {
     if (!timerInterval.value) {
       timerInterval.value = setInterval(() => {
-        if (timeLeft.value > 0) timeLeft.value--
-        else submitAnswer()
+        if (timeLeft.value > 0) {
+          timeLeft.value--
+        } else {
+          submitAnswer()
+        }
       }, 1000)
     }
   }
@@ -61,7 +65,11 @@ export const useQuizStore = defineStore('quiz', () => {
       timeLeft.value = 15
     } else {
       isFinished.value = true
-      postUserScore()
+
+      if (!hasPostedScore.value) {
+        postUserScore()
+        hasPostedScore.value = true
+      }
     }
   }
 
@@ -81,6 +89,7 @@ export const useQuizStore = defineStore('quiz', () => {
     questionsLeft.value = 5
     timeLeft.value = 15
     isFinished.value = false
+    hasPostedScore.value = false
     loading.value = true
   }
 

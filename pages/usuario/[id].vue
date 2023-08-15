@@ -3,7 +3,6 @@ const { id } = useRoute().params
 const { $profileStore } = useNuxtApp()
 
 const loading = ref(true)
-
 const userId = id as string
 
 const getProfileData = async () => {
