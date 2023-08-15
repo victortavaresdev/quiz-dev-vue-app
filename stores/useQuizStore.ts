@@ -15,7 +15,6 @@ export const useQuizStore = defineStore('quiz', () => {
 
   const currentQuestion = computed(() => questions.value[currentIndex.value])
   const totalQuestions = computed(() => questions.value.length)
-  const buttonText = computed(() => (selectedOption ? 'Próxima Pergunta' : 'Escolha uma opção'))
 
   const getRandomQuizByCategory = async (category: string) => {
     try {
@@ -62,7 +61,6 @@ export const useQuizStore = defineStore('quiz', () => {
       timeLeft.value = 15
     } else {
       isFinished.value = true
-      clearInterval(timerInterval.value)
       postUserScore()
     }
   }
@@ -97,7 +95,6 @@ export const useQuizStore = defineStore('quiz', () => {
     questionsLeft,
     timeLeft,
     currentQuestion,
-    buttonText,
     loading
   }
 })

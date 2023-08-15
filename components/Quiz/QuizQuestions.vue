@@ -68,7 +68,7 @@ const { $authStore, $quizStore } = useNuxtApp()
         @click="$quizStore.submitAnswer"
         :disabled="!$quizStore.selectedOption"
       >
-        {{ $quizStore.buttonText }}
+        Próxima Pergunta
       </button>
     </div>
   </div>
